@@ -9,6 +9,14 @@ function plot_sorting(mlseq::Matrix{T}, spikeforms::Matrix{T2}, data::Vector{T3}
     scene = Scene()
     ll = lines!(scene, [0.0], [0.0],color=:red)
     ll2 = lines!(scene, [0.0], [0.0])
+    map(scene.events.mousebuttons) do buttons
+        if ispressed(scene, Mouse.left)
+            pos = to_world(scene, Point2f0(scene.events.mouseposition[]))
+            if first(t) <= pos[1] <= last(t)
+                push!(s1[end][:value], pos[1])
+            end
+        end
+    end
     map(s1[end][:value],s2[end][:value]) do _ss1, _ss2
         idx1 = round(Int64,_ss1*fs+1)
         idx2 = idx1 + round(Int64,_ss2*fs)

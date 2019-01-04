@@ -13,9 +13,9 @@ function plot_sorting(mlseq::Matrix{T}, spikeforms::Matrix{T2}, data::Vector{T3}
     s1,a = AbstractPlotting.textslider(t, "t0", start=first(t))
     s2,b = AbstractPlotting.textslider(range(timestep, step=timestep/10,stop=1.0), "window", start=timestep)
     scene = Scene()
-    ll = lines!(scene, [0.0], [0.0],color=:red)
-    ll2 = lines!(scene, [0.0], [0.0])
-    pts = scatter!(scene, [0.0], [0.0],markersize=1.0)
+    ll = lines!(scene, [0.0, 1.0], [0.0, 1.0],color=:red)[end]
+    ll2 = lines!(scene, [0.0, 1.0], [0.0, 1.0])[end]
+    pts = scatter!(scene, [0.0,1.0], [0.0, 1.0],markersize=1.0)[end]
     map(scene.events.mousebuttons) do buttons
         if ispressed(scene, Mouse.left)
             pos = to_world(scene, Point2f0(scene.events.mouseposition[]))

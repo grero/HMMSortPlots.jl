@@ -35,10 +35,13 @@ function plot_sorting(mlseq::Matrix{T}, spikeforms::Matrix{T2}, data::Vector{T3}
                     end
                 end
             end
+            ymin,ymax = extrema(Y)
+            psize = 0.01*max(ymax-ymin, _ss2)
             push!(scene.plots[2][1],[Point2f0(x,y) for (x,y) in zip(range(_ss1,stop=_ss1+_ss2, length=length(Y)), Y)])
             push!(scene.plots[3][1],[Point2f0(x,y) for (x,y) in zip(range(_ss1,stop=_ss1+_ss2, length=length(Y)), data[idx1:idx2])])
             push!(scene.plots[4][1], _pts)
             push!(scene.plots[4][:color], _colors)
+            push!(scene.plots[4][:markersize], psize)
             AbstractPlotting.update_limits!(scene)
             AbstractPlotting.update!(scene)
         end

@@ -1,7 +1,3 @@
-using Makie
-using Colors
-using AbstractPlotting
-using MAT
 
 function plot_sorting(mlseq::Matrix{T}, spikeforms::Matrix{T2}, data::Vector{T3};fs=30_000, timestep=0.1) where T <: Integer where T2 <: Real where T3 <: Real
     ntemplates = size(spikeforms,2)

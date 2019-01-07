@@ -61,6 +61,5 @@ function plot_sorting(highpass_file::String, sorting_file::String;kvs...)
         sampling_rate = read(hh["rh/data/analogInfo/SampleRate"])[1]
         hdata, sampling_rate
     end
-    @show size(hdata), size(mlseq), size(spikeforms)
     scene = plot_sorting(mlseq, spikeforms, hdata;fs=sampling_rate, kvs...)
 end

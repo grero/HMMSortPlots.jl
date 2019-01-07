@@ -51,8 +51,8 @@ function plot_sorting(mlseq::Matrix{T}, spikeforms::Matrix{T2}, data::Vector{T3}
             AbstractPlotting.update_limits!(scene)
             AbstractPlotting.update!(scene)
         end
-    end 
-    hbox(vbox(s1,s2),scene)
+    end
+    hbox(hbox(vbox(s1,s2),scene), scene2)
 end
 
 function plot_sorting(highpass_file::String, sorting_file::String;kvs...)

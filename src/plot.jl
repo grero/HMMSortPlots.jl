@@ -13,10 +13,16 @@ function plot_sorting(mlseq::Matrix{T}, spikeforms::Matrix{T2}, data::Vector{T3}
     ll2 = lines!(scene, [0.0, 1.0], [0.0, 1.0])[end]
     pts = scatter!(scene, [0.0,1.0], [0.0, 1.0],markersize=1.0)[end]
     map(scene.events.mousebuttons) do buttons
-        if ispressed(scene, Mouse.left) &&  AbstractPlotting.is_mouseinside(scene)
+        if AbstractPlotting.is_mouseinside(scene)
             pos = to_world(scene, Point2f0(scene.events.mouseposition[]))
-            if first(t) <= pos[1] <= last(t)
-                push!(s1[end][:value], pos[1])
+            if ispressed(scene, Mouse.left)
+                if first(t) <= pos[1] <= last(t)
+                    push!(s1[end][:value], pos[1])
+                end
+            elseif ispressed(scene, Mouse.right)
+                if first(t) <= pos[1]-s2[end][:value].val <= last(t)
+                    push!(s1[end][:value], pos[1] - s2[end][:value].val)
+                end
             end
         end
     end

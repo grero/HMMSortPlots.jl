@@ -5,7 +5,7 @@ An attempt at a GUI for viewing the results of HMM based spike sorting.
 To view the sorting resutls contained in the file hmmsort.mat, using highpass data from the file highpassdata.mat
 
 ```julia
-Using HMMSortPlots
+using HMMSortPlots
 scene = plot_sorting("highpassdata.mat", "hmmsort.mat")
 ```
 Note that the structures in highpassdata.mat and hmmsort.mat should conform to the following

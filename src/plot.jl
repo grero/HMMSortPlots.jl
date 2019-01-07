@@ -11,7 +11,7 @@ function plot_sorting(mlseq::Matrix{T}, spikeforms::Matrix{T2}, data::Vector{T3}
     template_colors = distinguishable_colors(ntemplates, parse.(Colorant, ["deepskyblue","tomato"]))
     t = range(0.0, step=timestep, stop=(size(mlseq,2)-1)/fs)
     s1,a = AbstractPlotting.textslider(t, "t0", start=first(t))
-    s2,b = AbstractPlotting.textslider(range(timestep, step=timestep/10,stop=1.0), "window", start=timestep)
+    s2,b = AbstractPlotting.textslider(range(0.001, step=0.001,stop=1.0), "window", start=timestep)
     scene = Scene()
     ll = lines!(scene, [0.0, 1.0], [0.0, 1.0],color=:red)[end]
     ll2 = lines!(scene, [0.0, 1.0], [0.0, 1.0])[end]

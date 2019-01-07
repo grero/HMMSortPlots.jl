@@ -30,7 +30,7 @@ function plot_sorting(mlseq::Matrix{T}, spikeforms::Matrix{T2}, data::Vector{T3}
         if idx2 <= size(mlseq,2)
             Y = fill(0.0, idx2-idx1+1)
             kk = findall(mlseq[:,idx1:idx2] .== peak_state)
-            _pts = [Point2f0(_ss1 + _kk[2]/fs, hdata[idx1+_kk[2]-1]) for _kk in kk]
+            _pts = [Point2f0(_ss1 + _kk[2]/fs, data[idx1+_kk[2]-1]) for _kk in kk]
             _colors = [template_colors[_kk[1]] for _kk in kk]
             for (i,ii) in enumerate(idx1:idx2)
                 for j in 1:size(spikeforms,2)

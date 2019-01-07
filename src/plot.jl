@@ -50,3 +50,17 @@ function plot_sorting(mlseq::Matrix{T}, spikeforms::Matrix{T2}, data::Vector{T3}
     hbox(vbox(s1,s2),scene)
 end
 
+function plot_sorting(highpass_file::String, sorting_file::String;kvs...)
+    mlseq, spikeforms = HDF5.h5open(sorting_file) do ff
+        mlseq = round.(Int16, read(ff["mlseq"]))
+        spikeforms = permutedims(read(ff["spikeForms"])[:,1,:], [2,1])
+        mlseq, spikeforms
+    end
+    hdata, sampling_rate =  HDF5.h5open(highpass_file) do hh
+        hdata = read(hh["rh/data/analogData"])[:]
+        sampling_rate = read(hh["rh/data/analogInfo/SampleRate"])[1]
+        hdata, sampling_rate
+    end
+    @show size(hdata), size(mlseq), size(spikeforms)
+    scene = plot_sorting(mlseq, spikeforms, hdata;fs=sampling_rate, kvs...)
+end
